@@ -1,7 +1,8 @@
 import React from "react";
 import { Grid } from "semantic-ui-react";
 import { TitleWapper } from "../../../Common/CommonStyle";
-import { SearchBar } from "../../../Common/icon";
+//import { SearchBar } from "../../../Common/icon";
+//import dashboard from "../../../../Images/dasboard.jpg";
 
 const Dashboard = () => {
   return (
@@ -12,8 +13,8 @@ const Dashboard = () => {
       //  style={{ background: "#e9ecef;" }}
     >
       <TitleWapper>Dashboard</TitleWapper>
-
-      <SearchBar />
+      <img src="./images/dashboard.jpg" />
+      {/* <SearchBar /> */}
     </Grid.Column>
   );
 };

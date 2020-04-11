@@ -4,22 +4,22 @@ import { Status } from "../../../Common/icon";
 class SiteListTable extends Component {
   columns = [
     { date: "createdDate", label: "Date" },
-    { path: "customerId", label: "Customer Name" },
-    { path: "scriptId", label: "Site Name" },
+    // { path: "customerId", label: "Customer Name" },
+    // { path: "scriptId", label: "Site Name" },
     { path: "url.defaultUrl", label: "Url" },
     { path: "price", label: "Price" },
     {
       key: "button",
       label: "Paid",
-      content: site => (
+      content: (site) => (
         <Status
           // onSubmit={() => this.props.onDelete(site)}
           name="Details"
           color="#40a3dc"
           liked={site.paid}
         />
-      )
-    }
+      ),
+    },
 
     // {
     //   key: "button",
