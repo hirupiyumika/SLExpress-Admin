@@ -7,6 +7,7 @@ import { CButtons } from "../../../Common/buttons";
 import Joi from "joi-browser";
 import * as RegisterAdminService from "../../../../Service/RegisterAdminService";
 import auth from "../../../../Service/authAdminService";
+import Swal from "sweetalert2";
 
 class AdminSignUp extends Forms {
   state = {
@@ -35,6 +36,12 @@ class AdminSignUp extends Forms {
       const response = await RegisterAdminService.adminRegister(
         this.state.data
       );
+      Swal.fire({
+        icon: "success",
+        title: "Logging in Successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       auth.loginWithJwt("username", response.headers);
       window.location = "/Dashboard";
     } catch (ex) {

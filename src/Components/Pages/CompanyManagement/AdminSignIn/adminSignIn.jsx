@@ -6,32 +6,39 @@ import styled from "styled-components";
 import { TitleWapper } from "../../../Common/CommonStyle";
 import { CButtons } from "../../../Common/buttons";
 import Forms from "../../../Common/forms";
+import Swal from "sweetalert2";
 
 class AdminSignIn extends Forms {
   state = {
     data: { email: "", password: "" },
-    errors: {}
+    errors: {},
   };
 
   schema = {
-    email: Joi.string()
-      .required()
-      .email()
-      .label("E-mail"),
-    password: Joi.string()
-      .required()
-      .min(8)
-      .label("Password")
+    email: Joi.string().required().email().label("E-mail"),
+    password: Joi.string().required().min(8).label("Password"),
   };
 
   doSubmit = async () => {
     try {
       // const { data } = this.state;
       await auth.adminLogin(this.state.data);
+      Swal.fire({
+        icon: "success",
+        title: "Logging in Successfully",
+        showConfirmButton: false,
+        timer: 1000,
+      });
 
       const { state } = this.props.location;
       window.location = state ? state.from.pathname : "/dashboard";
     } catch (ex) {
+      Swal.fire({
+        icon: "error",
+        title: "Logging Error",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
         errors.email = ex.response.data;

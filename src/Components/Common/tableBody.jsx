@@ -12,7 +12,8 @@ class TableBody extends Component {
     else if (column.id) {
       const id = _.get(item, column.id);
       const name = this.props.map1.filter((n) => n._id == id);
-      if (name) return "anonymus";
+      //console.log("name", name);
+      if (name.length == 0) return "anonymus";
       else return name[0].firstName || name[0].name;
     } else if (column.count) {
       var count;

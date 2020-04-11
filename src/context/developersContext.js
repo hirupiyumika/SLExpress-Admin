@@ -12,8 +12,7 @@ import {
 import auth from "../Service/authAdminService";
 import _ from "lodash";
 import { toast } from "react-toastify";
-import Moment from "react-moment";
-import moment from "moment";
+import Swal from "sweetalert2";
 
 const DeveloperContext = React.createContext();
 
@@ -75,17 +74,53 @@ class DeveloperProvider extends Component {
   }
 
   handleDeveloperDelete = async (developer) => {
-    const developers = this.state.developers.filter(
-      (d) => d._id !== developer._id
-    );
-    this.setState({ developers });
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
 
-    try {
-      await deleteDeveloper(developer._id);
-    } catch (ex) {
-      if (ex.response && ex.response.status === 404)
-        toast.error("This site has already been deleted.");
-    }
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then(async (result) => {
+        if (result.value) {
+          swalWithBootstrapButtons.fire(
+            "Deleted!",
+            "Your file has been deleted.",
+            "success"
+          );
+          const developers = this.state.developers.filter(
+            (d) => d._id !== developer._id
+          );
+          this.setState({ developers });
+
+          try {
+            await deleteDeveloper(developer._id);
+          } catch (ex) {
+            if (ex.response && ex.response.status === 404)
+              toast.error("This site has already been deleted.");
+          }
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            "Cancelled",
+            "Your imaginary file is safe :)",
+            "error"
+          );
+        }
+      });
   };
 
   /**
@@ -117,6 +152,12 @@ class DeveloperProvider extends Component {
     try {
       await approveScript(script.id);
       this.scriptList();
+      Swal.fire({
+        icon: "success",
+        title: "Your work has been saved",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
         toast.error("This site has already been deleted.");

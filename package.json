@@ -25,6 +25,7 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",
     "styled-components": "^4.4.1",
+    "sweetalert2": "^9.10.10",
     "unstated-next": "^1.1.0"
   },
   "scripts": {

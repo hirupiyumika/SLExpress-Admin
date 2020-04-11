@@ -11,6 +11,7 @@ import {
 import auth from "../Service/authAdminService";
 import _ from "lodash";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const CustomerContext = React.createContext();
 
@@ -72,17 +73,63 @@ class CustomerProvider extends Component {
   }
 
   handleCustomerDelete = async (customer) => {
-    const customers = this.state.customers.filter(
-      (d) => d._id !== customer._id
-    );
-    this.setState({ customers });
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
 
-    try {
-      await deleteCustomer(customer._id);
-    } catch (ex) {
-      if (ex.response && ex.response.status === 404)
-        toast.error("This site has already been deleted.");
-    }
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then(async (result) => {
+        if (result.value) {
+          swalWithBootstrapButtons.fire(
+            "Deleted!",
+            "Your file has been deleted.",
+            "success"
+          );
+          const customers = this.state.customers.filter(
+            (d) => d._id !== customer._id
+          );
+          this.setState({ customers });
+          try {
+            await deleteCustomer(customer._id);
+          } catch (ex) {
+            if (ex.response && ex.response.status === 404)
+              toast.error("This site has already been deleted.");
+          }
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            "Cancelled",
+            "Your imaginary file is safe :)",
+            "error"
+          );
+        }
+      });
+    // const customers = this.state.customers.filter(
+    //   (d) => d._id !== customer._id
+    // );
+    // this.setState({ customers });
+
+    // try {
+    //   await deleteCustomer(customer._id);
+    // } catch (ex) {
+    //   if (ex.response && ex.response.status === 404)
+    //     toast.error("This site has already been deleted.");
+    // }
   };
 
   handleCustomerDetails = (customer) => {

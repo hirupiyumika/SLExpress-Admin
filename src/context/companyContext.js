@@ -15,6 +15,7 @@ import {
   getContactDetails,
   updateContactDetails,
 } from "./../Service/companyService";
+import Swal from "sweetalert2";
 
 const CompanyContext = React.createContext();
 
@@ -100,6 +101,12 @@ class CompanyProvider extends Component {
   handleCategorySave = async (category) => {
     try {
       const res = await saveCategory(category);
+      Swal.fire({
+        icon: "success",
+        title: "Mission Update Sucessfully..!!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       if (res.status === 200) await this.categoryList();
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
@@ -120,6 +127,12 @@ class CompanyProvider extends Component {
   async handleMissionUpdate(data) {
     try {
       const res = await updateMission(data.text);
+      Swal.fire({
+        icon: "success",
+        title: "Mission Update Sucessfully..!!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       if (res.status === 200) await this.Mission();
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
@@ -135,6 +148,12 @@ class CompanyProvider extends Component {
   async handleVisionUpdate(data) {
     try {
       const res = await updateVision(data.text);
+      Swal.fire({
+        icon: "success",
+        title: "Vision Update Sucessfully..!!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       if (res.status === 200) await this.Vision();
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
@@ -150,6 +169,12 @@ class CompanyProvider extends Component {
   async handleTosUpdate(data) {
     try {
       const res = await updateToS(data.text);
+      Swal.fire({
+        icon: "success",
+        title: "Terms of Services Update Sucessfully..!!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       if (res.status === 200) await this.ToS();
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
@@ -175,6 +200,12 @@ class CompanyProvider extends Component {
     console.log("contexdata", data);
     try {
       const res = await updateContactDetails(data);
+      Swal.fire({
+        icon: "success",
+        title: "Contact Details Update Sucessfully..!!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       if (res.status === 200) await this.ContactDetails();
     } catch (ex) {
       if (ex.response && ex.response.status === 404)
