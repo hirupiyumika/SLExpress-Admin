@@ -1,182 +1,35 @@
 import React, { Component } from "react";
-import { Grid, Message, Icon, Form, TextArea, Card } from "semantic-ui-react";
-import { TitleWapper } from "../../../Common/CommonStyle";
+import { Grid } from "semantic-ui-react";
+import { TitleWapper, StyleGrid } from "../../../Common/CommonStyle";
 import { DeveloperContext } from "../../../../context/developersContext";
 import _ from "lodash";
-import Forms from "../../../Common/forms";
-import Joi from "joi-browser";
-import { CButtons } from "../../../Common/buttons";
-import Moment from "react-moment";
 import { Loading } from "./../../../Common/icon";
+import Messagebox from "./../../../Common/messageBox";
+import styled from "styled-components";
 
-class DeveloperInquiries extends Forms {
+class DeveloperInquiries extends Component {
   static contextType = DeveloperContext;
-  state = {
-    data: {
-      _id: "",
-      message: "",
-    },
-    open: [],
-    errors: {},
-    loading: true,
-  };
-
-  schema = {
-    message: Joi.string().required().min(4).label("Message"),
-  };
-
-  componentDidMount = async () => {
-    const id = this.props.match.params.id;
-    this.setState({ data: this.setId(id) });
-    const open = this.props.location.status;
-    //  console.log("local", open);
-    this.setState({ open: this.setOpen(open), loading: false });
-    await this.context.handleInquiries(id);
-    this.setOpen(open);
-  };
-
-  setOpen(o) {
-    return {
-      open: o,
-    };
-  }
-
-  setId(id) {
-    return {
-      _id: id,
-    };
-  }
-
-  setOpen(open) {
-    if (open !== undefined) {
-      open = open[0];
-      console.log("fff", open);
-
-      if (open) {
-        localStorage.removeItem("open");
-        localStorage.setItem("open", "open");
-      }
-      if (!open) {
-        localStorage.removeItem("open");
-        localStorage.setItem("open", "close");
-      }
-    }
-  }
-
-  doSubmit = async () => {
-    try {
-      const AdminMsg = this.state.data;
-      console.log("dd", AdminMsg._id);
-      this.context.handleReply(AdminMsg.message, AdminMsg._id);
-      // this.setState({ [this.state.data.message]: "" });
-    } catch (ex) {
-      if (ex.response && ex.response.status === 400) {
-        const errors = { ...this.state.errors };
-        this.setState({ errors });
-      }
-    }
-  };
 
   render() {
-    const { sortAllMsg, loading } = this.context;
+    const { sortAllMsg, loading, handleInquiries, handleReply } = this.context;
 
     if (loading) {
       return <Loading />;
     }
 
     return (
-      <Grid.Column
-        mobile={13}
-        tablet={13}
-        computer={13}
-        // style={{ background: "#e9ecef;" }}
-      >
-        <br />
-        <br />
-        <TitleWapper>Developer Inquiries</TitleWapper>
-        <br />
-        <br />
-        <Grid>
-          <Grid.Column mobile={2} tablet={2} computer={2}></Grid.Column>
-          <Grid.Column mobile={10} tablet={10} computer={10}>
-            <Card fluid>
-              <Card.Content>
-                <br />
-                <br />
-                {sortAllMsg.map((d, index) => (
-                  <>
-                    {!d.adminReply && (
-                      <>
-                        <Grid key={index}>
-                          <Grid.Column
-                            mobile={1}
-                            tablet={1}
-                            computer={1}
-                          ></Grid.Column>
-                          <Grid.Column mobile={1} tablet={1} computer={1}>
-                            <Icon name="user circle" size="big" />
-                          </Grid.Column>
-                          <br />
-                          <Grid.Column mobile={13} tablet={13} computer={13}>
-                            <Message positive>
-                              {d.replyId.userReply}
-                              <Card.Meta style={{ textAlign: "right" }}>
-                                {<Moment calendar>{d.replyId.time}</Moment>}
-                              </Card.Meta>
-                            </Message>
-                          </Grid.Column>
-                          <br />
-                        </Grid>
-                        <br />
-                      </>
-                    )}
+      <Grid.Column mobile={13} tablet={13} computer={13}>
+        <StyleGrid>
+          <TitleWapper>Developer Inquiries</TitleWapper>
 
-                    {d.adminReply && (
-                      <>
-                        <Grid>
-                          <Grid.Column
-                            mobile={1}
-                            tablet={1}
-                            computer={1}
-                          ></Grid.Column>
-                          <Grid.Column mobile={13} tablet={13} computer={13}>
-                            <Message info>
-                              {d.adminReply}
-                              <Card.Meta style={{ textAlign: "right" }}>
-                                {<Moment calendar>{d.time}</Moment>}
-                              </Card.Meta>
-                            </Message>
-                          </Grid.Column>
-                          <br />
-                          <Grid.Column mobile={1} tablet={1} computer={1}>
-                            <Icon name="user circle outline" size="big" />
-                          </Grid.Column>
-                          <br />
-                        </Grid>
-
-                        <br />
-                      </>
-                    )}
-                  </>
-                ))}
-              </Card.Content>
-              {localStorage.open == "open" && (
-                <Card.Content>
-                  <Grid>
-                    <Grid.Column mobile={16} tablet={16} computer={16}>
-                      <Form onSubmit={this.handleSubmit}>
-                        {this.renderTextArea("message", "Message")}
-                        <br />
-                        <br />
-                        <CButtons name="Send" color="#40a3dc" />
-                      </Form>
-                    </Grid.Column>
-                  </Grid>
-                </Card.Content>
-              )}
-            </Card>
-          </Grid.Column>
-        </Grid>
+          <Messagebox
+            sortAllMsg={sortAllMsg}
+            id={this.props.match.params.id}
+            status={this.props.location.status}
+            inquiries={handleInquiries}
+            handleReply={handleReply}
+          />
+        </StyleGrid>
       </Grid.Column>
     );
   }

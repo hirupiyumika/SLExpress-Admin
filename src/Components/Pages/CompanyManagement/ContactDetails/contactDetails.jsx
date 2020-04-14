@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Segment, Form } from "semantic-ui-react";
-import { TitleWapper } from "../../../Common/CommonStyle";
+import { TitleWapper, StyleGrid } from "../../../Common/CommonStyle";
 import Forms from "../../../Common/forms";
 import { CompanyContext } from "../../../../context/companyContext";
 import styled from "styled-components";
@@ -67,24 +67,26 @@ class ContactDetails extends Forms {
     }
     return (
       <>
-        <Grid.Column mobile={3} tablet={3} computer={3}>
-          {" "}
-        </Grid.Column>
-        <Grid.Column mobile={7} tablet={7} computer={7}>
-          <TitleWapper>Contact Details</TitleWapper>
-          <Segment>
-            <StyledForm onSubmit={this.handleSubmit}>
-              {this.renderInput("phone", "Phone")}
-              {this.renderInput("address", "Address")}
-              {this.renderInput("branch1", "Branch 1")}
-              {this.renderInput("branch2", "Branch 2")}
-              {this.renderInput("branch3", "Branch 3")}
-              {this.renderInput("opening", "Opening")}
-              {this.renderInput("closing", "Closing")}
-              {this.renderInput("email", "E-mail", "email")}
-              <CButtons name="Update" color="#40a3dc" />
-            </StyledForm>
-          </Segment>
+        <Grid.Column mobile={13} tablet={13} computer={13}>
+          <StyleGrid>
+            <Grid.Column mobile={3} tablet={3} computer={3}></Grid.Column>
+            <Grid.Column mobile={10} tablet={10} computer={10}>
+              <TitleWapper>Contact Details</TitleWapper>
+              <Segment>
+                <StyledForm onSubmit={this.handleSubmit}>
+                  {this.renderInput("phone", "Phone")}
+                  {this.renderInput("address", "Address")}
+                  {this.renderInput("branch1", "Branch 1")}
+                  {this.renderInput("branch2", "Branch 2")}
+                  {this.renderInput("branch3", "Branch 3")}
+                  {this.renderInput("opening", "Opening")}
+                  {this.renderInput("closing", "Closing")}
+                  {this.renderInput("email", "E-mail", "email")}
+                  <CButtons name="Update" color="#40a3dc" />
+                </StyledForm>
+              </Segment>
+            </Grid.Column>
+          </StyleGrid>
         </Grid.Column>
       </>
     );

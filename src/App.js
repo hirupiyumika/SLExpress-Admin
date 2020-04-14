@@ -36,5 +36,5 @@ class App extends Component {
 export default App;
 
 const ContentWrapper = styled.div`
-  min-height: calc(100vh - 50px);
+  min-height: calc(100vh - 2.5rem);
 `;

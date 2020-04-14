@@ -9,7 +9,7 @@ import {
   Segment,
   Form,
 } from "semantic-ui-react";
-import { TitleWapper } from "../../../Common/CommonStyle";
+import { TitleWapper, StyleGrid } from "../../../Common/CommonStyle";
 import { CompanyContext } from "../../../../context/companyContext";
 import Cards from "../../../Common/cards";
 import styled from "styled-components";
@@ -33,25 +33,26 @@ class CompanyDetails extends Component {
     return (
       <>
         <Grid.Column mobile={13} tablet={13} computer={13}>
-          <TitleWapper>Company Details</TitleWapper>
-          <Grid>
-            <Grid.Column mobile={8} tablet={8} computer={8}>
-              <Cards
-                header="Our Mission"
-                name="Update"
-                text={ourMission.text}
-                date={ourMission.updatedDate}
-              />
-            </Grid.Column>
-            <Grid.Column mobile={8} tablet={8} computer={8}>
-              <Cards
-                header="Our Vision"
-                name="Update"
-                text={ourVision.text}
-                date={ourVision.updatedDate}
-              />
-            </Grid.Column>
-          </Grid>
+          <StyleGrid>
+            <TitleWapper>Company Details</TitleWapper>
+
+            {/* <Grid.Column mobile={8} tablet={8} computer={8}> */}
+            <Cards
+              header="Our Mission"
+              name="Update"
+              text={ourMission.text}
+              date={ourMission.updatedDate}
+            />
+            {/* </Grid.Column> */}
+            {/* <Grid.Column mobile={8} tablet={8} computer={8}> */}
+            <Cards
+              header="Our Vision"
+              name="Update"
+              text={ourVision.text}
+              date={ourVision.updatedDate}
+            />
+            {/* </Grid.Column> */}
+          </StyleGrid>
         </Grid.Column>
       </>
     );

@@ -17,10 +17,10 @@ const MenuData = [
     header: "Developer Management",
     list: ["developer list", "script list", "payment", "developer tickets"],
   },
-  {
-    header: "Business Plan Management",
-    list: ["business plan", "user ideas list"],
-  },
+  // {
+  //   header: "Business Plan Management",
+  //   list: ["business plan", "user ideas list"],
+  // },
 ];
 export function getMenu() {
   return MenuData;

@@ -23,11 +23,11 @@ export const Text = ({ name, errors, ...rest }) => {
   );
 };
 
-export const Area = ({ name, errors, ...rest }) => {
+export const Area = ({ name, errors, rows, ...rest }) => {
   return (
     <>
       <TextArea
-        rows={17}
+        rows={rows}
         placeholder="Type a Message..."
         {...rest}
         name={name}

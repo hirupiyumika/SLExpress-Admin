@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
-import { TitleWapper } from "../../../Common/CommonStyle";
+import { TitleWapper, StyleGrid } from "../../../Common/CommonStyle";
 import Pagination from "../../../Common/pagination";
 import { paginate } from "../../../Common/paginate";
 import CategoryTable from "./categoryTable";
@@ -28,14 +28,14 @@ class Category extends Component {
       pageSize,
       searchQuery,
       handleSearch,
-      sortColumn
+      sortColumn,
     } = this.context;
 
     const { length: count } = categories;
 
     let filtered = categories;
     if (searchQuery)
-      filtered = categories.filter(c =>
+      filtered = categories.filter((c) =>
         c.name.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
@@ -48,39 +48,41 @@ class Category extends Component {
 
     return (
       <>
-        <Grid.Column mobile={2} tablet={2} computer={2}></Grid.Column>
-        <Grid.Column mobile={8} tablet={8} computer={8}>
-          <TitleWapper>Categories List</TitleWapper>
-          {count === 0 ? (
-            <p>There are no categories in the database.</p>
-          ) : (
-            <p>Showing {totalCount} Categories in the database.</p>
-          )}
+        <Grid.Column mobile={13} tablet={13} computer={13}>
+          <StyleGrid>
+            <Grid.Column mobile={14} tablet={14} computer={14}>
+              <TitleWapper>Categories List</TitleWapper>
+              {count === 0 ? (
+                <p>There are no categories in the database.</p>
+              ) : (
+                <p>Showing {totalCount} Categories in the database.</p>
+              )}
 
-          <Link to="/category/category-form">
-            <IButtons name="Add New" color="blue" icon="add" />
-          </Link>
-          <br />
-          <br />
-          <SearchBar value={searchQuery} onChange={handleSearch} />
-          <CategoryTable
-            categories={allCategories}
-            currentPage={currentPage}
-            sortColumn={sortColumn}
-            onDelete={handleCategoryDelete}
-            onUpdate={handleCategoryUpdate}
-            onSort={handleSort}
-          />
-          <Pagination
-            itemCount={totalCount}
-            pageSize={pageSize}
-            currentPage={currentPage}
-            onPreviousPageChange={handlePreviousPageChange}
-            onPageChange={handlePageChange}
-            onNextPageChange={handleNextPageChange}
-          />
+              <Link to="/category/category-form">
+                <IButtons name="Add New" color="blue" icon="add" />
+              </Link>
+              <br />
+              <br />
+              <SearchBar value={searchQuery} onChange={handleSearch} />
+              <CategoryTable
+                categories={allCategories}
+                currentPage={currentPage}
+                sortColumn={sortColumn}
+                onDelete={handleCategoryDelete}
+                onUpdate={handleCategoryUpdate}
+                onSort={handleSort}
+              />
+              <Pagination
+                itemCount={totalCount}
+                pageSize={pageSize}
+                currentPage={currentPage}
+                onPreviousPageChange={handlePreviousPageChange}
+                onPageChange={handlePageChange}
+                onNextPageChange={handleNextPageChange}
+              />
+            </Grid.Column>
+          </StyleGrid>
         </Grid.Column>
-        <Grid.Column mobile={3} tablet={3} computer={3}></Grid.Column>
       </>
     );
   }

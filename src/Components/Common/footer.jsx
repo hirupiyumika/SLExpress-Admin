@@ -46,7 +46,7 @@ export default Footer;
 
 const FooterWapper = styled.div`
   height: 50px;
-  margin-top: 25px;
+  margin-top: 2.5rem;
   margin-left: 10px;
 `;
 

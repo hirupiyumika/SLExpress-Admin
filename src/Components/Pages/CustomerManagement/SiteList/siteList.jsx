@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
-import { TitleWapper } from "../../../Common/CommonStyle";
+import { TitleWapper, StyleGrid } from "../../../Common/CommonStyle";
 import Pagination from "../../../Common/pagination";
 import { paginate } from "../../../Common/paginate";
 import SiteListTable from "./siteListTable";
@@ -24,15 +24,15 @@ class SiteList extends Component {
       pageSize,
       searchQuery,
       handleSearch,
-      sortColumn
+      sortColumn,
     } = this.context;
 
     const { length: count } = sites;
 
     let filtered = sites;
     if (searchQuery)
-      filtered = sites.filter(s =>
-        s.username.toLowerCase().startsWith(searchQuery.toLowerCase())
+      filtered = sites.filter((s) =>
+        s.url.defaultUrl.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
     const allSites = paginate(sorted, currentPage, pageSize);
@@ -42,35 +42,34 @@ class SiteList extends Component {
     }
     console.log("siteList", sites);
     return (
-      <Grid.Column
-        mobile={13}
-        tablet={13}
-        computer={13}
-        style={{ overflowX: "scroll" }}
-      >
-        <TitleWapper>Site List</TitleWapper>
+      <Grid.Column mobile={13} tablet={13} computer={13}>
+        <StyleGrid style={{ overflowX: "scroll" }}>
+          <Grid.Column mobile={16} tablet={16} computer={16}>
+            <TitleWapper>Site List</TitleWapper>
 
-        {count === 0 ? (
-          <p>There are no sites in the database.</p>
-        ) : (
-          <p>Showing {totalCount} sites in the database.</p>
-        )}
-        <SearchBar value={searchQuery} onChange={handleSearch} />
-        <SiteListTable
-          sites={allSites}
-          currentPage={currentPage}
-          sortColumn={sortColumn}
-          onDelete={handleSiteDelete}
-          onSort={handleSort}
-        />
-        <Pagination
-          itemCount={totalCount}
-          pageSize={pageSize}
-          currentPage={currentPage}
-          onPreviousPageChange={handlePreviousPageChange}
-          onPageChange={handlePageChange}
-          onNextPageChange={handleNextPageChange}
-        />
+            {count === 0 ? (
+              <p>There are no sites in the database.</p>
+            ) : (
+              <p>Showing {totalCount} sites in the database.</p>
+            )}
+            <SearchBar value={searchQuery} onChange={handleSearch} />
+            <SiteListTable
+              sites={allSites}
+              currentPage={currentPage}
+              sortColumn={sortColumn}
+              onDelete={handleSiteDelete}
+              onSort={handleSort}
+            />
+            <Pagination
+              itemCount={totalCount}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPreviousPageChange={handlePreviousPageChange}
+              onPageChange={handlePageChange}
+              onNextPageChange={handleNextPageChange}
+            />
+          </Grid.Column>
+        </StyleGrid>
       </Grid.Column>
     );
   }

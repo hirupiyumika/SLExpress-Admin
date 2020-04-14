@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
-import { TitleWapper } from "../../../Common/CommonStyle";
+import { TitleWapper, StyleGrid } from "../../../Common/CommonStyle";
 import Pagination from "../../../Common/pagination";
 import { paginate } from "../../../Common/paginate";
 import DeveloperListTable from "./developerListTable";
@@ -24,14 +24,14 @@ class DeveloperList extends Component {
       pageSize,
       searchQuery,
       handleSearch,
-      sortColumn
+      sortColumn,
     } = this.context;
 
     const { length: count } = developers;
 
     let filtered = developers;
     if (searchQuery)
-      filtered = developers.filter(sd =>
+      filtered = developers.filter((sd) =>
         sd.username.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
@@ -43,28 +43,32 @@ class DeveloperList extends Component {
 
     return (
       <Grid.Column mobile={13} tablet={13} computer={13}>
-        <TitleWapper>Developers List</TitleWapper>
-        {count === 0 ? (
-          <p>There are no Developer-sites in the database.</p>
-        ) : (
-          <p>Showing {totalCount} Developer-sites in the database.</p>
-        )}
-        <SearchBar value={searchQuery} onChange={handleSearch} />
-        <DeveloperListTable
-          developers={allDevelopers}
-          currentPage={currentPage}
-          sortColumn={sortColumn}
-          onDelete={handleDeveloperDelete}
-          onSort={handleSort}
-        />
-        <Pagination
-          itemCount={totalCount}
-          pageSize={pageSize}
-          currentPage={currentPage}
-          onPreviousPageChange={handlePreviousPageChange}
-          onPageChange={handlePageChange}
-          onNextPageChange={handleNextPageChange}
-        />
+        <StyleGrid>
+          <Grid.Column mobile={16} tablet={16} computer={16}>
+            <TitleWapper>Developers List</TitleWapper>
+            {count === 0 ? (
+              <p>There are no Developer-sites in the database.</p>
+            ) : (
+              <p>Showing {totalCount} Developer-sites in the database.</p>
+            )}
+            <SearchBar value={searchQuery} onChange={handleSearch} />
+            <DeveloperListTable
+              developers={allDevelopers}
+              currentPage={currentPage}
+              sortColumn={sortColumn}
+              onDelete={handleDeveloperDelete}
+              onSort={handleSort}
+            />
+            <Pagination
+              itemCount={totalCount}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPreviousPageChange={handlePreviousPageChange}
+              onPageChange={handlePageChange}
+              onNextPageChange={handleNextPageChange}
+            />
+          </Grid.Column>
+        </StyleGrid>
       </Grid.Column>
     );
   }

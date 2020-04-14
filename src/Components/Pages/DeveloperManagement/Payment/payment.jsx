@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
-import { TitleWapper } from "../../../Common/CommonStyle";
+import { TitleWapper, StyleGrid } from "../../../Common/CommonStyle";
 import Pagination from "../../../Common/pagination";
 import { paginate } from "../../../Common/paginate";
 import { getMovies } from "../../../../FakeDatabase/fakeMovieService";
@@ -13,35 +13,35 @@ class Payment extends Component {
     movies: [],
     currentPage: 1,
     pageSize: 5,
-    sortColumn: { path: "title", order: "asc" }
+    sortColumn: { path: "title", order: "asc" },
   };
 
   componentDidMount = () => {
     this.setState({ movies: getMovies() });
   };
 
-  handleDelete = movie => {
-    const movies = this.state.movies.filter(m => m._id !== movie._id);
+  handleDelete = (movie) => {
+    const movies = this.state.movies.filter((m) => m._id !== movie._id);
     this.setState({ movies });
   };
 
-  handleDetails = movie => {
+  handleDetails = (movie) => {
     console.log("details");
   };
 
-  handlePageChange = page => {
+  handlePageChange = (page) => {
     this.setState({ currentPage: page });
   };
 
-  handlePreviousPageChange = page => {
+  handlePreviousPageChange = (page) => {
     this.setState({ currentPage: page - 1 });
   };
 
-  handleNextPageChange = page => {
+  handleNextPageChange = (page) => {
     this.setState({ currentPage: page + 1 });
   };
 
-  handleSort = sortColumn => {
+  handleSort = (sortColumn) => {
     this.setState({ sortColumn });
   };
 
@@ -70,31 +70,35 @@ class Payment extends Component {
         computer={13}
         // style={{ background: "#e9ecef;" }}
       >
-        <TitleWapper>Payment</TitleWapper>
-        <p>Showing {count} Payments in the database.</p>
-        <Link
-          to="Payment/newPayment"
-          className="btn btn-primary"
-          style={{ marginBottom: 20 }}
-        >
-          New Movie
-        </Link>
-        <PaymentTable
-          movies={movies}
-          currentPage={currentPage}
-          sortColumn={sortColumn}
-          onDelete={this.handleDelete}
-          onDetails={this.handleDetails}
-          onSort={this.handleSort}
-        />
-        <Pagination
-          itemCount={count}
-          pageSize={pageSize}
-          currentPage={currentPage}
-          onPreviousPageChange={this.handlePreviousPageChange}
-          onPageChange={this.handlePageChange}
-          onNextPageChange={this.handleNextPageChange}
-        />
+        <StyleGrid>
+          <Grid.Column mobile={16} tablet={16} computer={16}>
+            <TitleWapper>Payment</TitleWapper>
+            <p>Showing {count} Payments in the database.</p>
+            <Link
+              to="Payment/newPayment"
+              className="btn btn-primary"
+              style={{ marginBottom: 20 }}
+            >
+              New Movie
+            </Link>
+            <PaymentTable
+              movies={movies}
+              currentPage={currentPage}
+              sortColumn={sortColumn}
+              onDelete={this.handleDelete}
+              onDetails={this.handleDetails}
+              onSort={this.handleSort}
+            />
+            <Pagination
+              itemCount={count}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPreviousPageChange={this.handlePreviousPageChange}
+              onPageChange={this.handlePageChange}
+              onNextPageChange={this.handleNextPageChange}
+            />
+          </Grid.Column>
+        </StyleGrid>
       </Grid.Column>
     );
   }

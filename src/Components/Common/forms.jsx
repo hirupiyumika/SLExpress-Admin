@@ -6,6 +6,7 @@ class Forms extends Component {
   state = {
     data: {},
     errors: {},
+    rows: "",
   };
   validate = () => {
     const options = { abortEarly: false };
@@ -61,7 +62,7 @@ class Forms extends Component {
   }
 
   renderTextArea(name, lable, type = "text") {
-    const { data, errors } = this.state;
+    const { data, errors, rows } = this.state;
 
     return (
       <Area
@@ -70,6 +71,7 @@ class Forms extends Component {
         onChange={this.handleChange}
         group
         type={type}
+        rows={rows}
         errors={errors[name]}
       />
     );

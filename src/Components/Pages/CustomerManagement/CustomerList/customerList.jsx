@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
-import { TitleWapper } from "../../../Common/CommonStyle";
+import { TitleWapper, StyleGrid } from "../../../Common/CommonStyle";
 import Pagination from "../../../Common/pagination";
 import { paginate } from "../../../Common/paginate";
 import CustomerListTable from "./customerListTable";
@@ -25,14 +25,14 @@ class CustomerList extends Component {
       pageSize,
       searchQuery,
       handleSearch,
-      sortColumn
+      sortColumn,
     } = this.context;
 
     const { length: count } = customers;
 
     let filtered = customers;
     if (searchQuery)
-      filtered = customers.filter(c =>
+      filtered = customers.filter((c) =>
         c.username.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
@@ -45,30 +45,34 @@ class CustomerList extends Component {
 
     return (
       <Grid.Column mobile={13} tablet={13} computer={13}>
-        <TitleWapper>User List</TitleWapper>
+        <StyleGrid>
+          <Grid.Column mobile={16} tablet={16} computer={16}>
+            <TitleWapper>User List</TitleWapper>
 
-        {count === 0 ? (
-          <p>There are no customers in the database.</p>
-        ) : (
-          <p>Showing {totalCount} customers in the database.</p>
-        )}
-        <SearchBar value={searchQuery} onChange={handleSearch} />
-        <CustomerListTable
-          customers={allCustomers}
-          currentPage={currentPage}
-          sortColumn={sortColumn}
-          onDelete={handleCustomerDelete}
-          onDetails={handleCustomerDetails}
-          onSort={handleSort}
-        />
-        <Pagination
-          itemCount={totalCount}
-          pageSize={pageSize}
-          currentPage={currentPage}
-          onPreviousPageChange={handlePreviousPageChange}
-          onPageChange={handlePageChange}
-          onNextPageChange={handleNextPageChange}
-        />
+            {count === 0 ? (
+              <p>There are no customers in the database.</p>
+            ) : (
+              <p>Showing {totalCount} customers in the database.</p>
+            )}
+            <SearchBar value={searchQuery} onChange={handleSearch} />
+            <CustomerListTable
+              customers={allCustomers}
+              currentPage={currentPage}
+              sortColumn={sortColumn}
+              onDelete={handleCustomerDelete}
+              onDetails={handleCustomerDetails}
+              onSort={handleSort}
+            />
+            <Pagination
+              itemCount={totalCount}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPreviousPageChange={handlePreviousPageChange}
+              onPageChange={handlePageChange}
+              onNextPageChange={handleNextPageChange}
+            />
+          </Grid.Column>
+        </StyleGrid>
       </Grid.Column>
     );
   }

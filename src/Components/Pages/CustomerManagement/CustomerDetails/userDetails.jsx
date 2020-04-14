@@ -1,15 +1,15 @@
 import React from "react";
 import { Grid, Divider, Segment, Image, Form, Input } from "semantic-ui-react";
 import ButtonGroup from "./buttonGroup";
-import UserListContainer from "../../../../Containers/UserList.container";
+//import UserListContainer from "../../../../Containers/UserList.container";
 import styled from "styled-components";
 import { TitleWapper } from "../../../Common/CommonStyle";
 import { Buttons } from "../../../Common/buttons";
 import { Link } from "react-router-dom";
 
 const UserDetails = () => {
-  const { details } = UserListContainer.useContainer();
-  console.log(details);
+  // const { details } = UserListContainer.useContainer();
+  // console.log(details);
   return (
     <Grid.Column
       mobile={13}
@@ -19,7 +19,7 @@ const UserDetails = () => {
     >
       <TitleWapper>User Details</TitleWapper>
       <ButtonGroup />
-      <Segment>
+      {/* <Segment>
         <Grid columns={2} relaxed="very">
           <Grid.Column>
             <Image
@@ -63,17 +63,17 @@ const UserDetails = () => {
         </Grid>
 
         <Divider vertical>And</Divider>
-      </Segment>
+      </Segment> */}
     </Grid.Column>
   );
 };
 
 export default UserDetails;
 
-const StyledForm = styled(Form)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 25px;
-`;
+// const StyledForm = styled(Form)`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-direction: column;
+//   margin: 25px;
+// `;

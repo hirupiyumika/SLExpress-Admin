@@ -13,6 +13,7 @@ class Cards extends Forms {
   state = {
     data: { text: "" },
     errors: {},
+    rows: 17,
   };
 
   schema = {

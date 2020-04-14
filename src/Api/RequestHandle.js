@@ -1,7 +1,7 @@
-import axios from "axios";
+// import axios from "axios";
 
-const Request = axios.create({
-  baseURL: "http://slexpress.tk:3000/admin"
-});
+// const Request = axios.create({
+//   baseURL: "http://slexpress.tk:3000/admin"
+// });
 
-export default Request;
+// export default Request;

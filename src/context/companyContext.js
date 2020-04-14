@@ -77,18 +77,67 @@ class CompanyProvider extends Component {
   }
 
   handleCategoryDelete = async (category) => {
-    const categories = this.state.categories.filter(
-      (c) => c._id !== category._id
-    );
-    this.setState({ categories });
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
 
-    try {
-      console.log(category._id);
-      await deleteCategory(category._id);
-    } catch (ex) {
-      if (ex.response && ex.response.status === 404)
-        toast.error("This site has already been deleted.");
-    }
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then(async (result) => {
+        if (result.value) {
+          swalWithBootstrapButtons.fire(
+            "Deleted!",
+            "Your file has been deleted.",
+            "success"
+          );
+          const categories = this.state.categories.filter(
+            (c) => c._id !== category._id
+          );
+          this.setState({ categories });
+
+          try {
+            console.log(category._id);
+            await deleteCategory(category._id);
+          } catch (ex) {
+            if (ex.response && ex.response.status === 404)
+              toast.error("This site has already been deleted.");
+          }
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            "Cancelled",
+            "Your imaginary file is safe :)",
+            "error"
+          );
+        }
+      });
+
+    // const categories = this.state.categories.filter(
+    //   (c) => c._id !== category._id
+    // );
+    // this.setState({ categories });
+
+    // try {
+    //   console.log(category._id);
+    //   await deleteCategory(category._id);
+    // } catch (ex) {
+    //   if (ex.response && ex.response.status === 404)
+    //     toast.error("This site has already been deleted.");
+    // }
   };
 
   handleCategoryUpdate = (category, size) => {
@@ -101,12 +150,12 @@ class CompanyProvider extends Component {
   handleCategorySave = async (category) => {
     try {
       const res = await saveCategory(category);
-      Swal.fire({
-        icon: "success",
-        title: "Mission Update Sucessfully..!!",
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      // Swal.fire({
+      //   icon: "success",
+      //   title: "Mission Update Sucessfully..!!",
+      //   showConfirmButton: false,
+      //   timer: 1500,
+      // });
       if (res.status === 200) await this.categoryList();
     } catch (ex) {
       if (ex.response && ex.response.status === 404)

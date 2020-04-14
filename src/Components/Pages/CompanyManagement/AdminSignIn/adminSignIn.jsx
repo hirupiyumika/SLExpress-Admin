@@ -3,7 +3,7 @@ import { Grid, Segment, Form } from "semantic-ui-react";
 import Joi from "joi-browser";
 import auth from "../../../../Service/authAdminService";
 import styled from "styled-components";
-import { TitleWapper } from "../../../Common/CommonStyle";
+import { TitleWapper, StyleGrid } from "../../../Common/CommonStyle";
 import { CButtons } from "../../../Common/buttons";
 import Forms from "../../../Common/forms";
 import Swal from "sweetalert2";
@@ -54,7 +54,7 @@ class AdminSignIn extends Forms {
         computer={16}
         // style={{ background: "green" }}
       >
-        <Grid>
+        <StyleGrid style={{ marginLeft: " 0.5rem" }}>
           <Grid.Column mobile={5} tablet={5} computer={5}></Grid.Column>
           <Grid.Column mobile={6} tablet={6} computer={6}>
             <TitleWapper>Admin Sign In</TitleWapper>
@@ -67,7 +67,7 @@ class AdminSignIn extends Forms {
             </Segment>
           </Grid.Column>
           <Grid.Column mobile={5} tablet={5} computer={5}></Grid.Column>
-        </Grid>
+        </StyleGrid>
       </Grid.Column>
     );
   }

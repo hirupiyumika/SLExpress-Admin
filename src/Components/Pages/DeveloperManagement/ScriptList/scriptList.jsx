@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
-import { TitleWapper } from "../../../Common/CommonStyle";
+import { TitleWapper, StyleGrid } from "../../../Common/CommonStyle";
 import Pagination from "../../../Common/pagination";
 import { paginate } from "../../../Common/paginate";
 import DeveloperSiteListTable from "./scriptListTable";
@@ -47,38 +47,37 @@ class ScriptList extends Component {
     //   console.log("buyers", buyers);
 
     return (
-      <Grid.Column
-        mobile={13}
-        tablet={13}
-        computer={13}
-        style={{ overflowX: "scroll" }}
-      >
-        <TitleWapper>Script List</TitleWapper>
+      <Grid.Column mobile={13} tablet={13} computer={13}>
+        <StyleGrid style={{ overflowX: "scroll" }}>
+          <Grid.Column mobile={16} tablet={16} computer={16}>
+            <TitleWapper>Script List</TitleWapper>
 
-        {count === 0 ? (
-          <p>There are no Script in the database.</p>
-        ) : (
-          <p>Showing {totalCount} Scripts in the database.</p>
-        )}
-        <SearchBar value={searchQuery} onChange={handleSearch} />
-        <DeveloperSiteListTable
-          scripts={allScripts}
-          map1={developers}
-          map2={buyers}
-          onApprovel={handleApprovel}
-          currentPage={currentPage}
-          sortColumn={sortColumn}
-          onDelete={handleDeveloperSiteDelete}
-          onSort={handleSort}
-        />
-        <Pagination
-          itemCount={totalCount}
-          pageSize={pageSize}
-          currentPage={currentPage}
-          onPreviousPageChange={handlePreviousPageChange}
-          onPageChange={handlePageChange}
-          onNextPageChange={handleNextPageChange}
-        />
+            {count === 0 ? (
+              <p>There are no Script in the database.</p>
+            ) : (
+              <p>Showing {totalCount} Scripts in the database.</p>
+            )}
+            <SearchBar value={searchQuery} onChange={handleSearch} />
+            <DeveloperSiteListTable
+              scripts={allScripts}
+              map1={developers}
+              map2={buyers}
+              onApprovel={handleApprovel}
+              currentPage={currentPage}
+              sortColumn={sortColumn}
+              onDelete={handleDeveloperSiteDelete}
+              onSort={handleSort}
+            />
+            <Pagination
+              itemCount={totalCount}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPreviousPageChange={handlePreviousPageChange}
+              onPageChange={handlePageChange}
+              onNextPageChange={handleNextPageChange}
+            />
+          </Grid.Column>
+        </StyleGrid>
       </Grid.Column>
     );
   }

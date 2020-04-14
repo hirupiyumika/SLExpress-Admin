@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Segment, Form } from "semantic-ui-react";
 import styled from "styled-components";
-import { TitleWapper } from "../../../Common/CommonStyle";
+import { TitleWapper, StyleGrid } from "../../../Common/CommonStyle";
 import Forms from "../../../Common/forms";
 import { CButtons } from "../../../Common/buttons";
 import Joi from "joi-browser";
@@ -56,9 +56,9 @@ class AdminSignUp extends Forms {
   render() {
     return (
       <Grid.Column mobile={13} tablet={13} computer={13}>
-        <Grid>
-          <Grid.Column mobile={4} tablet={4} computer={4}></Grid.Column>
-          <Grid.Column mobile={7} tablet={7} computer={7}>
+        <StyleGrid>
+          <Grid.Column mobile={3} tablet={3} computer={3}></Grid.Column>
+          <Grid.Column mobile={10} tablet={10} computer={10}>
             <TitleWapper>Admin Sign Up</TitleWapper>
             <Segment>
               <StyledForm onSubmit={this.handleSubmit}>
@@ -73,7 +73,7 @@ class AdminSignUp extends Forms {
             </Segment>
           </Grid.Column>
           <Grid.Column mobile={5} tablet={5} computer={5}></Grid.Column>
-        </Grid>
+        </StyleGrid>
       </Grid.Column>
     );
   }
