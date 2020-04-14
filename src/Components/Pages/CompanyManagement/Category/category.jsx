@@ -48,7 +48,12 @@ class Category extends Component {
 
     return (
       <>
-        <Grid.Column mobile={13} tablet={13} computer={13}>
+        <Grid.Column
+          mobile={13}
+          tablet={13}
+          computer={13}
+          style={{ animation: "fadeIn 1s ease-in" }}
+        >
           <StyleGrid>
             <Grid.Column mobile={14} tablet={14} computer={14}>
               <TitleWapper>Categories List</TitleWapper>

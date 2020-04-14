@@ -32,7 +32,12 @@ class CompanyDetails extends Component {
     }
     return (
       <>
-        <Grid.Column mobile={13} tablet={13} computer={13}>
+        <Grid.Column
+          mobile={13}
+          tablet={13}
+          computer={13}
+          style={{ animation: "fadeIn 1s ease-in" }}
+        >
           <StyleGrid>
             <TitleWapper>Company Details</TitleWapper>
 

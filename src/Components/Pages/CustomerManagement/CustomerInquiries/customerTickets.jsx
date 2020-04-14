@@ -17,7 +17,12 @@ class CustomerTickets extends Component {
     }
     console.log("AllTickets", tickets);
     return (
-      <Grid.Column mobile={13} tablet={13} computer={13}>
+      <Grid.Column
+        mobile={13}
+        tablet={13}
+        computer={13}
+        style={{ animation: "fadeIn 1s ease-in" }}
+      >
         <StyleGrid>
           <TitleWapper>Customer Tickets</TitleWapper>
           <Grid>

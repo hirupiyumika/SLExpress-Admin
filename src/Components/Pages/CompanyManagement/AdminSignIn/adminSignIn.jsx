@@ -52,7 +52,7 @@ class AdminSignIn extends Forms {
         mobile={16}
         tablet={16}
         computer={16}
-        // style={{ background: "green" }}
+        style={{ animation: "fadeIn 1s ease-in" }}
       >
         <StyleGrid style={{ marginLeft: " 0.5rem" }}>
           <Grid.Column mobile={5} tablet={5} computer={5}></Grid.Column>

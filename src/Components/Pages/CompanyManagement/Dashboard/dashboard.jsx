@@ -10,7 +10,7 @@ const Dashboard = () => {
       mobile={13}
       tablet={13}
       computer={13}
-      //  style={{ background: "#e9ecef;" }}
+      style={{ animation: "fadeIn 1s ease-in" }}
     >
       <TitleWapper>Dashboard</TitleWapper>
       <img src="./images/dashboard.jpg" />

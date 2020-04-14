@@ -68,7 +68,7 @@ class Payment extends Component {
         mobile={13}
         tablet={13}
         computer={13}
-        // style={{ background: "#e9ecef;" }}
+        style={{ animation: "fadeIn 1s ease-in" }}
       >
         <StyleGrid>
           <Grid.Column mobile={16} tablet={16} computer={16}>

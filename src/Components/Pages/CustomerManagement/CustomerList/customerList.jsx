@@ -44,10 +44,15 @@ class CustomerList extends Component {
     }
 
     return (
-      <Grid.Column mobile={13} tablet={13} computer={13}>
+      <Grid.Column
+        mobile={13}
+        tablet={13}
+        computer={13}
+        style={{ animation: "fadeIn 1s ease-in" }}
+      >
         <StyleGrid>
           <Grid.Column mobile={16} tablet={16} computer={16}>
-            <TitleWapper>User List</TitleWapper>
+            <TitleWapper>Customer List</TitleWapper>
 
             {count === 0 ? (
               <p>There are no customers in the database.</p>

@@ -10,7 +10,7 @@ const Tables = ({
   data,
   map1,
   map2,
-  currentPage
+  currentPage,
 }) => {
   return (
     <Table basic="very" style={{ margin: 25 }}>

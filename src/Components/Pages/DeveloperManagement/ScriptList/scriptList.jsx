@@ -47,7 +47,12 @@ class ScriptList extends Component {
     //   console.log("buyers", buyers);
 
     return (
-      <Grid.Column mobile={13} tablet={13} computer={13}>
+      <Grid.Column
+        mobile={13}
+        tablet={13}
+        computer={13}
+        style={{ animation: "fadeIn 1s ease-in" }}
+      >
         <StyleGrid style={{ overflowX: "scroll" }}>
           <Grid.Column mobile={16} tablet={16} computer={16}>
             <TitleWapper>Script List</TitleWapper>

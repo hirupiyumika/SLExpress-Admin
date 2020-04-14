@@ -42,7 +42,12 @@ class SiteList extends Component {
     }
     console.log("siteList", sites);
     return (
-      <Grid.Column mobile={13} tablet={13} computer={13}>
+      <Grid.Column
+        mobile={13}
+        tablet={13}
+        computer={13}
+        style={{ animation: "fadeIn 1s ease-in" }}
+      >
         <StyleGrid style={{ overflowX: "scroll" }}>
           <Grid.Column mobile={16} tablet={16} computer={16}>
             <TitleWapper>Site List</TitleWapper>

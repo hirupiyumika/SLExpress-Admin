@@ -67,7 +67,12 @@ class ContactDetails extends Forms {
     }
     return (
       <>
-        <Grid.Column mobile={13} tablet={13} computer={13}>
+        <Grid.Column
+          mobile={13}
+          tablet={13}
+          computer={13}
+          style={{ animation: "fadeIn 1s ease-in" }}
+        >
           <StyleGrid>
             <Grid.Column mobile={3} tablet={3} computer={3}></Grid.Column>
             <Grid.Column mobile={10} tablet={10} computer={10}>
