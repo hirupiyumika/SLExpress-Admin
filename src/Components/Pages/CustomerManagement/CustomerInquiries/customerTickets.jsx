@@ -3,7 +3,7 @@ import { Grid } from "semantic-ui-react";
 import { TitleWapper, StyleGrid } from "../../../Common/CommonStyle";
 import { CustomerContext } from "../../../../context/customersContext";
 import _ from "lodash";
-import Loading from "./../../../Common/loading";
+import { Loading } from "./../../../Common/icon";
 import Ticket from "./../../../Common/ticket";
 
 class CustomerTickets extends Component {

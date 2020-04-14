@@ -1,9 +1,24 @@
 import React from "react";
-import { Loader, Icon, Input } from "semantic-ui-react";
+import { Loader, Icon, Input, Grid } from "semantic-ui-react";
 import styled from "styled-components";
+import { StyleGrid } from "./CommonStyle";
 
 export const Loading = () => {
-  return <Loader active inline="centered" style={{ marginTop: "250px" }} />;
+  return (
+    <Grid.Column mobile={13} tablet={13} computer={13}>
+      <StyleGrid>
+        <Loader
+          active
+          inline="centered"
+          style={{
+            marginTop: "11rem",
+            marginLeft: "27rem",
+            marginBottom: "11rem",
+          }}
+        />
+      </StyleGrid>
+    </Grid.Column>
+  );
 };
 
 export const Down = () => {
@@ -31,7 +46,7 @@ export const SearchBar = ({ value, onChange }) => {
       value={value}
       group
       type="text"
-      onChange={e => onChange(e.currentTarget.value)}
+      onChange={(e) => onChange(e.currentTarget.value)}
     />
   );
 };
